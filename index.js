@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import { Bot } from "grammy";
-import { getWeatherOVB, getWeatherUTP } from "./weather.js";
+import { getWeather } from "./weather.js";
 import { getCurrency } from "./currency.js";
 import { getWaveHeight } from "./waveHeight.js";
 import { menu } from "./config.js";
@@ -28,9 +28,9 @@ bot.on("message", async (ctx) => {
       },
     });
   } else if (ctx.message.text == "Узнать погоду OVB 🌤️") {
-    getWeatherOVB(ctx);
+    getWeather(ctx, 'novosibirsk');
   } else if (ctx.message.text == "Узнать погоду UTP 🌤️") {
-		getWeatherUTP(ctx);
+		getWeather(ctx, 'pattaya');
   } else if (ctx.message.text == "Узнать курс доллара 💵") {
     getCurrency(ctx);
 	} else if (ctx.message.text == "Высота волн в Паттайе 🌊") {

@@ -16,3 +16,8 @@ export const windDirections = {
   "NW": "Северо-Западный",
   "NNW": "Северо-Северо-Западный"
 };
+
+export const cityName = {
+	novosibirsk: "Новосибирск",
+	pattaya: "Паттайя"
+}
