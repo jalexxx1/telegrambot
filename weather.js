@@ -1,15 +1,17 @@
 import axios from "axios";
 import { logData } from "./log.js";
+import fs from 'fs';
+import { InputFile } from "grammy";
 
 export const getWeatherOVB = async (ctx) => {
 	try {
-		const response = await axios.get(process.env.WEATHER_API_URL_OVB);
-		console.log(response.data.data);
-		let res = response.data.data[0];
-		let text = `// ${res.city_name} //\n\nТемпература: ${res.temp}℃\nВетер: ${res.wind_spd}м/c\nНаправление: ${res.wind_cdir_full}\nВидимость: ${res.vis}км\n${res.weather.description}`;
-		let iconLink = `https://cdn.weatherbit.io/static/img/icons/${res.weather.icon}.png`;
+		const response = await axios.get(process.env.METEOSOURCE_API_OVB);
+		console.log(response.data.current);
+		let resCurrent = response.data.current;
+		let text = `// Новосибирск //\n\nТемпература: ${resCurrent.temperature}℃\nВетер: ${resCurrent.wind.speed}м/c\nНаправление: ${resCurrent.wind.dir}\nОсадки: ${resCurrent.summary}`;
+		let iconLink = fs.readFileSync(`iconset/${resCurrent.icon_num}.png`);		
 		logData(ctx, 'погоды');
-		await ctx.replyWithPhoto(iconLink);
+		await ctx.replyWithPhoto(new InputFile(iconLink));
 		await ctx.reply(text);
 	} catch (error) {
 		return console.log(`Ошибка в получении данных: ${error}`);
@@ -18,13 +20,13 @@ export const getWeatherOVB = async (ctx) => {
 
 export const getWeatherUTP = async (ctx) => {
 	try {
-		const response = await axios.get(process.env.WEATHER_API_URL_UTP);
-		console.log(response.data.data);
-		let res = response.data.data[0];
-		let text = `// ${res.city_name} //\n\nТемпература: ${res.temp}℃\nВетер: ${res.wind_spd}м/c\nНаправление: ${res.wind_cdir_full}\nВидимость: ${res.vis}км\n${res.weather.description}`;
-		let iconLink = `https://cdn.weatherbit.io/static/img/icons/${res.weather.icon}.png`;
+		const response = await axios.get(process.env.METEOSOURCE_API_UTP);
+		console.log(response.data.current);
+		let resCurrent = response.data.current;
+		let text = `// Паттайя //\n\nТемпература: ${resCurrent.temperature}℃\nВетер: ${resCurrent.wind.speed}м/c\nНаправление: ${resCurrent.wind.dir}\nОсадки: ${resCurrent.summary}`;
+		let iconLink = fs.readFileSync(`iconset/${resCurrent.icon_num}.png`);		
 		logData(ctx, 'погоды');
-		await ctx.replyWithPhoto(iconLink);
+		await ctx.replyWithPhoto(new InputFile(iconLink));
 		await ctx.reply(text);
 	} catch (error) {
 		return console.log(`Ошибка в получении данных: ${error}`);
