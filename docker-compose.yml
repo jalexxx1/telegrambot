@@ -5,8 +5,13 @@ services:
     build: .
     container_name: telegram-bot
     restart: unless-stopped
-    env_file:
-      - .env
+    environment:
+      TELEGRAM_BOT_KEY=${TELEGRAM_BOT_KEY}
+      CURRENCY_API_URL=${CURRENCY_API_URL}
+      STORMGLASS_API_URL=${STORMGLASS_API_URL}
+      STORMGLASS_API_KEY=${STORMGLASS_API_KEY}
+      METEOSOURCE_API_URL1=${METEOSOURCE_API_URL1}
+      METEOSOURCE_API_URL2=${METEOSOURCE_API_URL2}
     volumes:
       - ./log.txt:/app/log.txt
       - ./iconset:/app/iconset
