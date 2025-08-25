@@ -12,6 +12,3 @@ services:
       - STORMGLASS_API_KEY
       - METEOSOURCE_API_URL1
       - METEOSOURCE_API_URL2
-    volumes:
-      - ./log.txt:/app/log.txt
-      - ./iconset:/app/iconset
