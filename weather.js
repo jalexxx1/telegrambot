@@ -14,7 +14,7 @@ export const getWeather = async (ctx, city) => {
     const futureHoursPrediction = () => {
       let prediction = [];
       for (let index = 0; index < resFuture.length; index++) {
-        prediction.push(`\n ${resFuture[index].date.split("T")[1].split(":").slice(0, 2).join(":")} - Температура: ${resFuture[index].temperature}, Осадки: ${resFuture[index].summary}\n`);
+        prediction.push(`\n ${resFuture[index].date.split("T")[1].split(":").slice(0, 2).join(":")} - Температура: ${resFuture[index].temperature}℃, Осадки: ${resFuture[index].summary}\n`);
       }
       return prediction.slice(0, 11).join("");
     };
